@@ -17,8 +17,8 @@ app.get("/api/hello", (req, res) => {
     port: 587,
     secure: false,
     auth: {
-      user: gmailUser,
-      pass: gmailPassword,
+      user: "rupzvirdi.96@gmail.com",
+      pass: "rgkr mssa lmuq wrud",
     },
     connectionTimeout: 10000,
     greetingTimeout: 10000,
