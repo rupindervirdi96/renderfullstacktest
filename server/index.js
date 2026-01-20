@@ -12,25 +12,26 @@ app.get("/api/health", (req, res) => {
 });
 
 app.get("/api/hello", (req, res) => {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: "rupzvirdi.96@gmail.com",
-      pass: "rgkr mssa lmuq wrud",
-    },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000,
-  });
+  // const transporter = nodemailer.createTransport({
+  //   host: "smtp.gmail.com",
+  //   port: 587,
+  //   secure: false,
+  //   auth: {
+  //     user: "rupzvirdi.96@gmail.com",
+  //     pass: "rgkr mssa lmuq wrud",
+  //   },
+  //   connectionTimeout: 10000,
+  //   greetingTimeout: 10000,
+  //   socketTimeout: 10000,
+  // });
 
-  return transporter.sendMail({
-    from: `"Puncham Cars" <rupzvirdi.96@gmail.com>`,
-    to: "rupindervirdi96@gmail.com",
-    subject: "New Dream Car Form Submission",
-    html,
-  });
+  // return transporter.sendMail({
+  //   from: `"Puncham Cars" <rupzvirdi.96@gmail.com>`,
+  //   to: "rupindervirdi96@gmail.com",
+  //   subject: "New Dream Car Form Submission",
+  //   html,
+  // });
+  res.json({ message: "Hello from the server!", time: new Date().toISOString() });
 });
 
 app.use(express.static(path.join(__dirname, "../client/build")));
