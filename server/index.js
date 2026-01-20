@@ -35,7 +35,7 @@ app.get("/api/hello", async (req, res) => {
   // 2️⃣ Send email in background
   transporter
     .sendMail({
-      from: `"Puncham Cars" <${process.env.GMAIL_USER}>`,
+      from: `"Puncham Cars" <rupzvirdi.96@gmail.com>`,
       to: "rupindervirdi96@gmail.com",
       subject: "Test Email",
       html: `<p>You have a new form submission!</p>`,
