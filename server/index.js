@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const nodemailer = require("nodemailer");
 
 const app = express();
 const PORT = process.env.PORT || 10000;
@@ -11,9 +12,24 @@ app.get("/api/health", (req, res) => {
 });
 
 app.get("/api/hello", (req, res) => {
-  res.json({
-    message: "Hello from Express 👋",
-    time: new Date().toISOString(),
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: gmailUser,
+      pass: gmailPassword,
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
+  });
+
+  return transporter.sendMail({
+    from: `"Puncham Cars" <rupzvirdi.96@gmail.com>`,
+    to: "rupindervirdi96@gmail.com",
+    subject: "New Dream Car Form Submission",
+    html,
   });
 });
 
@@ -22,7 +38,6 @@ app.use(express.static(path.join(__dirname, "../client/build")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
