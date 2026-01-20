@@ -1,9 +1,19 @@
 const express = require("express");
 const path = require("path");
 const nodemailer = require("nodemailer");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 10000;
+
+// Enable CORS for the React dev server
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
@@ -23,11 +33,7 @@ app.get("/api/health", (req, res) => {
 
 app.get("/api/hello", async (req, res) => {
   // 1️⃣ Respond immediately
-  res.json({
-    message: "Email triggered",
-    time: new Date().toISOString(),
-  });
-
+  
   // 2️⃣ Send email in background
   transporter
     .sendMail({
@@ -36,15 +42,15 @@ app.get("/api/hello", async (req, res) => {
       subject: "Test Email",
       html: `<p>You have a new form submission!</p>`,
     })
-    .then(() => console.log("Test email sent"))
+    .then(() => res.json({ message: "Hello from Express!", time: new Date().toISOString() }))
     .catch((err) => console.error("Email failed:", err));
 });
 
-app.use(express.static(path.join(__dirname, "../client/build")));
+// app.use(express.static(path.join(__dirname, "../client/build")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
