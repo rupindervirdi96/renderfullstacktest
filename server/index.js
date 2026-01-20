@@ -9,17 +9,13 @@ app.use(express.json());
 
 // ✅ Create transporter ONCE
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: "rupzvirdi.96@gmail.com",
-    pass: "rgkr mssa lmuq wrud",
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
-});
+      service: "Gmail",
+      auth: {
+        user: "rupzvirdi.96@gmail.com",
+        pass: "rgkr mssa lmuq wrud",
+      },
+      tls: { rejectUnauthorized: false },
+    });
 
 app.get("/api/health", (req, res) => {
   res.json({ status: "OK" });
