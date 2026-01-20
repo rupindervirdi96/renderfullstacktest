@@ -1,2 +1,0 @@
-# Inherit root ignores; keep server-specific here if needed
-node_modules/
